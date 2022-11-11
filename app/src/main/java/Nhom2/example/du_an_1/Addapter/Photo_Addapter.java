@@ -10,7 +10,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import java.util.List;
 import Nhom2.example.du_an_1.Fragment.Fragment_photo;
-import Nhom2.example.du_an_1.Object.Photo_Object;
+import Nhom2.example.du_an_1.Model.Photo_Object;
 public class Photo_Addapter extends FragmentStateAdapter {
 
     private Context mContext;

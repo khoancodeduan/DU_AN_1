@@ -1,4 +1,4 @@
-package Nhom2.example.du_an_1;
+package Nhom2.example.du_an_1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,13 +11,11 @@ import android.os.Looper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
-import java.util.TimerTask;
 
 
 import Nhom2.example.du_an_1.Addapter.Photo_Addapter;
-import Nhom2.example.du_an_1.Fragment.Fragment_photo;
-import Nhom2.example.du_an_1.Object.Photo_Object;
-import me.relex.circleindicator.CircleIndicator;
+import Nhom2.example.du_an_1.Model.Photo_Object;
+import Nhom2.example.du_an_1.R;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class MainActivity extends AppCompatActivity {

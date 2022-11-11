@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import Nhom2.example.du_an_1.Object.Photo_Object;
+import Nhom2.example.du_an_1.Model.Photo_Object;
 import Nhom2.example.du_an_1.R;
 
 public class Fragment_photo extends Fragment {
