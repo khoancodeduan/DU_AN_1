@@ -1,4 +1,4 @@
-package Nhom2.example.du_an_1.Object;
+package Nhom2.example.du_an_1.Model;
 
 import java.io.Serializable;
 

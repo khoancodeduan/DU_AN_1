@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#03A9F4"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <androidx.viewpager2.widget.ViewPager2
         android:background="@drawable/blogviewpage2"
