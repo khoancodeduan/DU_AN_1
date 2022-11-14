@@ -16,7 +16,6 @@ public class Photo_Addapter extends FragmentStateAdapter {
     private Context mContext;
     private List<Photo_Object> mlist;
 
-
     public Photo_Addapter(@NonNull FragmentActivity fragmentActivity, List<Photo_Object> list) {
         super(fragmentActivity);
         this.mlist = list;
@@ -27,7 +26,6 @@ public class Photo_Addapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
 
         Photo_Object object = mlist.get(position);
-
         Bundle bundle = new Bundle();
         bundle.putSerializable("object_photo", object);
         Fragment_photo photo = new Fragment_photo();
