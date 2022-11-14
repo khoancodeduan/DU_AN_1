@@ -16,7 +16,9 @@ import java.util.Timer;
 
 
 import Nhom2.example.du_an_1.Addapter.Photo_Addapter;
+import Nhom2.example.du_an_1.Dao.TbCatDao;
 import Nhom2.example.du_an_1.Model.Photo_Object;
+import Nhom2.example.du_an_1.Model.TbCategory;
 import Nhom2.example.du_an_1.R;
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -26,9 +28,6 @@ public class MainActivity extends AppCompatActivity {
     private Photo_Addapter photoaddapter;
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private List<Photo_Object> mlistphoto;
-    private Timer timer;
-    private ImageView ick;
-
 
     private Runnable runnable = new Runnable() {
         @Override
@@ -54,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
         photoaddapter = new Photo_Addapter(this, mlistphoto);
         viewPager.setAdapter(photoaddapter);
         indicator.setViewPager(viewPager);
+
+
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -62,6 +63,32 @@ public class MainActivity extends AppCompatActivity {
                 mHandler.postDelayed(runnable, 1000);
             }
         });
+
+
+        TbCatDao catDao = new TbCatDao();
+        //======== Thêm mới 1 dòng
+        TbCategory newObjCat = new TbCategory();
+        newObjCat.setName("Thể loại mới");
+
+        catDao.insertRow(newObjCat);
+
+
+        // Sửa dữ liệu:
+        TbCategory objCatUpdate = new TbCategory();
+        objCatUpdate.setId(3);
+        objCatUpdate.setName("Dữ liệu đã sửa");
+
+        catDao.updateRow(objCatUpdate);
+
+        List<TbCategory> listCat = catDao.getAll(); // lấy danh sách cho vào biến
+
+        // duyệt mảng in ra danh sách
+        for(int i = 0; i<listCat.size(); i++){
+            TbCategory objCat = listCat.get(i);
+            Log.d("zzzzz", "onCreate: phần tử thứ " + i + ":  id = " + objCat.getId() + ", name = " + objCat.getName());
+
+        }
+
     }
 
     private List<Photo_Object> getListphoto() {
