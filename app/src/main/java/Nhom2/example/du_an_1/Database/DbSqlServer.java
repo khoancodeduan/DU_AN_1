@@ -27,6 +27,4 @@ public class DbSqlServer {
         }
         return connection;
     }
-
-
 }

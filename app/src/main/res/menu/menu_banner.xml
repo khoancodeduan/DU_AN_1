@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/dh_cuatoi"
+        android:title="Đơn hàng của tôi"
+        android:icon="@drawable/list_alt"
+        />
+
+    <item
+        android:id="@+id/ql_kho"
+        android:title="Quản Lý kho"
+        android:icon="@drawable/warehouse"
+        />
+
+    <item
+        android:id="@+id/Doang_thu"
+        android:title="Doanh Thu"
+        android:icon="@drawable/money"
+        />
+
+    <item
+        android:id="@+id/dang_ky_ban"
+        android:title="Đăng kí bán Hàng"
+        android:icon="@drawable/breakfast_dining"
+        />
+
+    <item
+        android:id="@+id/shop_cuat"
+        android:title="Shop của tôi"
+        android:icon="@drawable/directory"
+        />
+
+    <item android:title="Account">
+        <menu>
+            <item
+                android:id="@+id/doi_mk"
+                android:icon="@drawable/repeat"
+                android:title="Đổi mật khẩu" />
+
+            <item
+                android:id="@+id/dang_xuat"
+                android:icon="@drawable/logout"
+                android:title="Đăng xuất" />
+        </menu>
+    </item>
+
+
+</menu>

@@ -2,12 +2,17 @@ package Nhom2.example.du_an_1.Activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 
 import java.util.ArrayList;
@@ -23,6 +28,8 @@ import Nhom2.example.du_an_1.R;
 import me.relex.circleindicator.CircleIndicator3;
 
 public class MainActivity extends AppCompatActivity {
+    DrawerLayout layout;
+    Toolbar toolbar;
     private ViewPager2 viewPager;
     private CircleIndicator3 indicator;
     private Photo_Addapter photoaddapter;
@@ -55,6 +62,13 @@ public class MainActivity extends AppCompatActivity {
         indicator.setViewPager(viewPager);
 
 
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        layout = findViewById(R.id.drawerLayout);
+
         viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -83,11 +97,28 @@ public class MainActivity extends AppCompatActivity {
         List<TbCategory> listCat = catDao.getAll(); // lấy danh sách cho vào biến
 
         // duyệt mảng in ra danh sách
-        for(int i = 0; i<listCat.size(); i++){
+        for (int i = 0; i < listCat.size(); i++) {
             TbCategory objCat = listCat.get(i);
             Log.d("zzzzz", "onCreate: phần tử thứ " + i + ":  id = " + objCat.getId() + ", name = " + objCat.getName());
 
         }
+
+    }
+
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                layout.openDrawer(GravityCompat.START);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_top, menu);
+        return true;
 
     }
 
