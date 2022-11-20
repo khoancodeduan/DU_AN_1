@@ -66,103 +66,103 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        viewPager = findViewById(R.id.id_viewpage2);
-        indicator = findViewById(R.id.Indicator);
-        mlistphoto = getListphoto();
-        photoaddapter = new Photo_Addapter(this, mlistphoto);
-        viewPager.setAdapter(photoaddapter);
-        indicator.setViewPager(viewPager);
-        nav_menu =findViewById(R.id.nav_menu);
-        nav_menu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                FragmentManager manager = getSupportFragmentManager();
-                  switch (item.getItemId()){
-                      case R.id.dh_cuatoi:
-                          DonHangFragment donHangFragment = new DonHangFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,donHangFragment).commit();
-                          break;
-                      case R.id.nav_Home:
-                          Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                          startActivity(intent);
-                          break;
-                      case R.id.ql_kho:
-                          QuanLyKhoFragment quanLyKhoFragment = new QuanLyKhoFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,quanLyKhoFragment).commit();
-                          break;
-                      case R.id.Doang_thu:
-                          DoanhThuFragment doanhThuFragment = new DoanhThuFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,doanhThuFragment).commit();
-                          break;
-                      case R.id.dang_ky_ban:
-                          DangKyBanFragment dangKyBanFragment = new DangKyBanFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,dangKyBanFragment).commit();
-                          break;
-                      case R.id.shop_cuat:
-                          ShopFragment shopFragment = new ShopFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,shopFragment).commit();
-                          break;
-                      case R.id.doi_mk:
-                           DoiMKFragment doiMKFragment = new DoiMKFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,doiMKFragment).commit();
-                          break;
-                      case R.id.dang_xuat:
-                          ThoatFragment thoatFragment = new ThoatFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,thoatFragment).commit();
-                          break;
-                  }
-
-                  layout.closeDrawers();
-                return false;
-            }
-        });
-
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-        layout = findViewById(R.id.drawerLayout);
-
-        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                mHandler.removeCallbacks(runnable);
-                mHandler.postDelayed(runnable, 1000);
-            }
-        });
-
-
-        TbCatDao catDao = new TbCatDao();
-        //======== Thêm mới 1 dòng
-        TbCategory newObjCat = new TbCategory();
-        newObjCat.setName("Thể loại mới");
-
-        catDao.insertRow(newObjCat);
-
-
-        // Sửa dữ liệu:
-        TbCategory objCatUpdate = new TbCategory();
-        objCatUpdate.setId(3);
-        objCatUpdate.setName("Dữ liệu đã sửa");
-
-        catDao.updateRow(objCatUpdate);
-
-        List<TbCategory> listCat = catDao.getAll(); // lấy danh sách cho vào biến
-
-        // duyệt mảng in ra danh sách
-        for (int i = 0; i < listCat.size(); i++) {
-            TbCategory objCat = listCat.get(i);
-            Log.d("zzzzz", "onCreate: phần tử thứ " + i + ":  id = " + objCat.getId() + ", name = " + objCat.getName());
-
-        }
-
-    }
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//        viewPager = findViewById(R.id.id_viewpage2);
+//        indicator = findViewById(R.id.Indicator);
+//        mlistphoto = getListphoto();
+//        photoaddapter = new Photo_Addapter(this, mlistphoto);
+//        viewPager.setAdapter(photoaddapter);
+//        indicator.setViewPager(viewPager);
+//        nav_menu =findViewById(R.id.nav_menu);
+//        nav_menu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+//                FragmentManager manager = getSupportFragmentManager();
+//                  switch (item.getItemId()){
+//                      case R.id.dh_cuatoi:
+//                          DonHangFragment donHangFragment = new DonHangFragment();
+//                          manager.beginTransaction().replace(R.id.frameContent,donHangFragment).commit();
+//                          break;
+//                      case R.id.nav_Home:
+//                          Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+//                          startActivity(intent);
+//                          break;
+//                      case R.id.ql_kho:
+//                          QuanLyKhoFragment quanLyKhoFragment = new QuanLyKhoFragment();
+//                          manager.beginTransaction().replace(R.id.frameContent,quanLyKhoFragment).commit();
+//                          break;
+//                      case R.id.Doang_thu:
+//                          DoanhThuFragment doanhThuFragment = new DoanhThuFragment();
+//                          manager.beginTransaction().replace(R.id.frameContent,doanhThuFragment).commit();
+//                          break;
+//                      case R.id.dang_ky_ban:
+//                          DangKyBanFragment dangKyBanFragment = new DangKyBanFragment();
+//                          manager.beginTransaction().replace(R.id.frameContent,dangKyBanFragment).commit();
+//                          break;
+//                      case R.id.shop_cuat:
+//                          ShopFragment shopFragment = new ShopFragment();
+//                          manager.beginTransaction().replace(R.id.frameContent,shopFragment).commit();
+//                          break;
+//                      case R.id.doi_mk:
+//                           DoiMKFragment doiMKFragment = new DoiMKFragment();
+//                          manager.beginTransaction().replace(R.id.frameContent,doiMKFragment).commit();
+//                          break;
+//                      case R.id.dang_xuat:
+//                          ThoatFragment thoatFragment = new ThoatFragment();
+//                          manager.beginTransaction().replace(R.id.frameContent,thoatFragment).commit();
+//                          break;
+//                  }
+//
+//                  layout.closeDrawers();
+//                return false;
+//            }
+//        });
+//
+//        toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        getSupportActionBar().setHomeAsUpIndicator(R.drawable.menu);
+//        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        layout = findViewById(R.id.drawerLayout);
+//
+//        viewPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+//            @Override
+//            public void onPageSelected(int position) {
+//                super.onPageSelected(position);
+//                mHandler.removeCallbacks(runnable);
+//                mHandler.postDelayed(runnable, 1000);
+//            }
+//        });
+//
+//
+//        TbCatDao catDao = new TbCatDao();
+//        //======== Thêm mới 1 dòng
+//        TbCategory newObjCat = new TbCategory();
+//        newObjCat.setName("Thể loại mới");
+//
+//        catDao.insertRow(newObjCat);
+//
+//
+//        // Sửa dữ liệu:
+//        TbCategory objCatUpdate = new TbCategory();
+//        objCatUpdate.setId(3);
+//        objCatUpdate.setName("Dữ liệu đã sửa");
+//
+//        catDao.updateRow(objCatUpdate);
+//
+//        List<TbCategory> listCat = catDao.getAll(); // lấy danh sách cho vào biến
+//
+//        // duyệt mảng in ra danh sách
+//        for (int i = 0; i < listCat.size(); i++) {
+//            TbCategory objCat = listCat.get(i);
+//            Log.d("zzzzz", "onCreate: phần tử thứ " + i + ":  id = " + objCat.getId() + ", name = " + objCat.getName());
+//
+//        }
+//
+//    }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
