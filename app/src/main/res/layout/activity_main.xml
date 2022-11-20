@@ -23,28 +23,29 @@
 
 
         </androidx.appcompat.widget.Toolbar>
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/id_viewpage2"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/blogviewpage2" />
-
-        <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/Indicator"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="16dp"
-            app:ci_drawable="@drawable/blogintor" />
-
         <FrameLayout
             android:id="@+id/frameContent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical" />
+            android:orientation="vertical" >
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/id_viewpage2"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blogviewpage2" />
+
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                app:ci_drawable="@drawable/blogintor" />
+
+        </FrameLayout>
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
@@ -65,6 +66,5 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_heder"
         app:menu="@menu/menu_banner" />
-
 
 </androidx.drawerlayout.widget.DrawerLayout>
