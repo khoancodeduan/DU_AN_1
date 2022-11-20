@@ -50,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private List<Photo_Object> mlistphoto;
 
+    ///khoan reser du an ...
+
     private Runnable runnable = new Runnable() {
         @Override
         public void run() {
