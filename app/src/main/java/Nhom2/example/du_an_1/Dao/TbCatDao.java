@@ -24,24 +24,17 @@ public class TbCatDao {
         try {
             if (this.objConn != null) {
 
-                String sqlQuery = "SELECT * FROM tb_category ";
-
+                String sqlQuery = "SELECT * FROM HANG ";
                 Statement statement = this.objConn.createStatement(); // khởi tạo cấu trúc truy vấn
-
                 ResultSet resultSet = statement.executeQuery(sqlQuery); // thực thi câu lệnh truy vấn
 
                 while (resultSet.next()) { // đọc dữ liệu gán vào đối tượng và đưa vào list
-
                     TbCategory objCat = new TbCategory();
                     objCat.setId(resultSet.getInt("id")); // truyền tên cột dữ liệu
                     objCat.setName(resultSet.getString("name")); // tên cột dữ liệu là name
-
                      listCat.add(objCat);
                 }
             } // nếu kết nối khác null thì mới select và thêm dữ liệu vào, nếu không thì trả về ds rỗng
-
-
-
         } catch (Exception e) {
             Log.e("zzzzzzzzzz", "getAll: Có lỗi truy vấn dữ liệu " );
             e.printStackTrace();
@@ -55,7 +48,7 @@ public class TbCatDao {
         try {
             if (this.objConn != null) {
                 // ghép chuỗi SQL
-                String insertSQL = "INSERT INTO tb_category(name) VALUES (N'" + objCat.getName() + "') ";
+                String insertSQL = "INSERT INTO HANG(name) VALUES (N'" + objCat.getName() + "') ";
 
                 String generatedColumns[] = { "ID" };
                 PreparedStatement stmtInsert = this.objConn.prepareStatement(insertSQL, generatedColumns);
@@ -83,7 +76,7 @@ public class TbCatDao {
         try {
             if (this.objConn != null) {
                 // ghép chuỗi SQL
-                String sqlUpdate = "UPDATE tb_category SET name= N'" + objCat.getName() + "' WHERE id = " + objCat.getId();
+                String sqlUpdate = "UPDATE HANG SET name= N'" + objCat.getName() + "' WHERE id = " + objCat.getId();
 
 
                 PreparedStatement stmt = this.objConn.prepareStatement(sqlUpdate);
