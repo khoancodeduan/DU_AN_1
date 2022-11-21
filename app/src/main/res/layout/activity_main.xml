@@ -23,54 +23,29 @@
 
 
         </androidx.appcompat.widget.Toolbar>
-
         <FrameLayout
             android:id="@+id/frameContent"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical" >
 
-            <LinearLayout
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/id_viewpage2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="220dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blogviewpage2" />
 
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:id="@+id/id_viewpage2"
-                    android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/blogviewpage2" />
-
-                <me.relex.circleindicator.CircleIndicator3
-                    android:id="@+id/Indicator"
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center_horizontal"
-                    app:ci_drawable="@drawable/blogintor" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/RecycaleView"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Sản Phẩm mới"
-                    android:textSize="30dp" />
-
-
-                <ListView
-                    android:id="@+id/list_vewenu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-            </LinearLayout>
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                app:ci_drawable="@drawable/blogintor" />
 
         </FrameLayout>
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"
