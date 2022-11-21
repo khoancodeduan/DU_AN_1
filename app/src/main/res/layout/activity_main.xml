@@ -30,42 +30,32 @@
             android:layout_weight="1"
             android:orientation="vertical" >
 
-           <LinearLayout
-               android:orientation="vertical"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content">
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/id_viewpage2"
+                android:layout_width="match_parent"
+                android:layout_height="220dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/blogviewpage2" />
 
-
-               <androidx.viewpager2.widget.ViewPager2
-                   android:id="@+id/id_viewpage2"
-                   android:layout_width="match_parent"
-                   android:layout_height="220dp"
-                   android:layout_marginTop="10dp"
-                   android:background="@drawable/blogviewpage2" />
-
-               <me.relex.circleindicator.CircleIndicator3
-                   android:id="@+id/Indicator"
-                   android:layout_width="wrap_content"
-                   android:layout_height="50dp"
-                   android:layout_gravity="center_horizontal"
-                   android:layout_marginTop="10dp"
-                   app:ci_drawable="@drawable/blogintor" />
-               <TextView
-                   android:text="Sản Phẩm mới"
-                   android:textSize="30dp"
-
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"/>
-
-               <ListView
-                   android:id="@+id/list_vewenu"
-                   android:layout_width="match_parent"
-                   android:layout_height="wrap_content"/>
-           </LinearLayout>
-
+            <me.relex.circleindicator.CircleIndicator3
+                android:id="@+id/Indicator"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="220dp"
+                app:ci_drawable="@drawable/blogintor" />
+            <TextView
+                android:layout_marginTop="250dp"
+                android:text="Danh Mục"
+                android:textSize="30sp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RCVDoc"
+                android:layout_marginTop="280dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
         </FrameLayout>
-
-
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_nav"

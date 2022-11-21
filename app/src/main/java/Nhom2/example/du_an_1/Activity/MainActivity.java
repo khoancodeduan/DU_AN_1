@@ -88,10 +88,6 @@ public class MainActivity extends AppCompatActivity {
                           DonHangFragment donHangFragment = new DonHangFragment();
                           manager.beginTransaction().replace(R.id.frameContent,donHangFragment).commit();
                           break;
-                      case R.id.nav_Home:
-                          Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                          startActivity(intent);
-                          break;
                       case R.id.ql_kho:
                           QuanLyKhoFragment quanLyKhoFragment = new QuanLyKhoFragment();
                           manager.beginTransaction().replace(R.id.frameContent,quanLyKhoFragment).commit();
