@@ -77,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter(photoaddapter);
         indicator.setViewPager(viewPager);
         nav_menu =findViewById(R.id.nav_menu);
+
+
         nav_menu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
