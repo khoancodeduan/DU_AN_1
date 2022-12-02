@@ -9,7 +9,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
@@ -17,16 +16,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -34,7 +27,6 @@ import com.google.android.material.navigation.NavigationView;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
 
 
 import Nhom2.example.du_an_1.Addapter.Addapter_rscv_main;
@@ -259,9 +251,9 @@ public class MainActivity extends AppCompatActivity {
         list.add(new Photo_Object(R.drawable.img2));
         list.add(new Photo_Object(R.drawable.img3));
         list.add(new Photo_Object(R.drawable.img4));
-        list.add(new Photo_Object(R.drawable.d4fe1536c88bb248bd4ba26e116d44cd));
-        list.add(new Photo_Object(R.drawable.d7b093557aee36dc49ca066134b9856f));
-        list.add(new Photo_Object(R.drawable.e35c3d218c0fd24f9ab07a133f9ad2c5));
+        list.add(new Photo_Object(R.drawable.in01));
+        list.add(new Photo_Object(R.drawable.in03));
+        list.add(new Photo_Object(R.drawable.in02));
         return list;
     }
 
