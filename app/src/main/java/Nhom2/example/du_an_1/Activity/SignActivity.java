@@ -48,15 +48,6 @@ public class SignActivity extends AppCompatActivity {
         layout = findViewById(R.id.drawbleLayout1);
 
 
-        TextView tv = findViewById(R.id.signin_tv);
-        tv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Tao_tkActivity.class);
-                startActivity(intent);
-            }
-        });
-
 
     }
 

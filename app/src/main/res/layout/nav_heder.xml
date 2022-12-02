@@ -5,8 +5,9 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/logoo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 />
+
 </androidx.cardview.widget.CardView>

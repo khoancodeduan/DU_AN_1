@@ -6,9 +6,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,8 +20,15 @@ import android.os.Looper;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,15 +37,19 @@ import java.util.List;
 import java.util.Timer;
 
 
+import Nhom2.example.du_an_1.Addapter.Addapter_rscv_main;
 import Nhom2.example.du_an_1.Addapter.Photo_Addapter;
 import Nhom2.example.du_an_1.Dao.TbCatDao;
 import Nhom2.example.du_an_1.Fragment.DangKyBanFragment;
 import Nhom2.example.du_an_1.Fragment.DoanhThuFragment;
 import Nhom2.example.du_an_1.Fragment.DoiMKFragment;
 import Nhom2.example.du_an_1.Fragment.DonHangFragment;
+import Nhom2.example.du_an_1.Fragment.Gio_hangFragment;
 import Nhom2.example.du_an_1.Fragment.QuanLyKhoFragment;
+import Nhom2.example.du_an_1.Fragment.SettingFragment;
 import Nhom2.example.du_an_1.Fragment.ShopFragment;
 import Nhom2.example.du_an_1.Fragment.ThoatFragment;
+import Nhom2.example.du_an_1.Fragment.Thong_baoFragment;
 import Nhom2.example.du_an_1.Model.Photo_Object;
 import Nhom2.example.du_an_1.Model.TbCategory;
 import Nhom2.example.du_an_1.R;
@@ -49,7 +64,15 @@ public class MainActivity extends AppCompatActivity {
     private Photo_Addapter photoaddapter;
     private Handler mHandler = new Handler(Looper.getMainLooper());
     private List<Photo_Object> mlistphoto;
+    ListView layoutitem; //li
+    BottomNavigationView view;
+    private ArrayAdapter<String> adapter1;
 
+    ListView lv; //li
+
+    List<TbCategory> list;
+    Addapter_rscv_main adapter;
+    TbCatDao dao;
     ///khoan reser du an ...
 
     private Runnable runnable = new Runnable() {
@@ -66,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,45 +100,82 @@ public class MainActivity extends AppCompatActivity {
         photoaddapter = new Photo_Addapter(this, mlistphoto);
         viewPager.setAdapter(photoaddapter);
         indicator.setViewPager(viewPager);
-        nav_menu =findViewById(R.id.nav_menu);
+        nav_menu = findViewById(R.id.nav_menu);
+        layoutitem = findViewById(R.id.RCVDoc);
+        view = findViewById(R.id.bottom_nav);
+
+//   layoutitem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//       @Override
+//       public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//           Toast.makeText(MainActivity.this,"Thành công", Toast.LENGTH_SHORT).show();
+//       }
+//   });
+
+        view.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {  
+
+                Fragment fragment;
+                switch (item.getItemId()) {
+                    case R.id.nav_Home:
+                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_Cart:
+                        fragment = new Gio_hangFragment();
+                        loadFrag(fragment);
+                        break;
+                    case R.id.nav_Bell:
+                        fragment = new Thong_baoFragment();
+                        loadFrag(fragment);
+                        break;
+                    case R.id.nav_setting:
+                        fragment = new SettingFragment();
+                        loadFrag(fragment);
+
+                        break;
+                }
+                return true;
+            }
+        });
 
 
         nav_menu.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 FragmentManager manager = getSupportFragmentManager();
-                  switch (item.getItemId()){
-                      case R.id.dh_cuatoi:
-                          DonHangFragment donHangFragment = new DonHangFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,donHangFragment).commit();
-                          break;
-                      case R.id.ql_kho:
-                          QuanLyKhoFragment quanLyKhoFragment = new QuanLyKhoFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,quanLyKhoFragment).commit();
-                          break;
-                      case R.id.Doang_thu:
-                          DoanhThuFragment doanhThuFragment = new DoanhThuFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,doanhThuFragment).commit();
-                          break;
-                      case R.id.dang_ky_ban:
-                          DangKyBanFragment dangKyBanFragment = new DangKyBanFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,dangKyBanFragment).commit();
-                          break;
-                      case R.id.shop_cuat:
-                          ShopFragment shopFragment = new ShopFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,shopFragment).commit();
-                          break;
-                      case R.id.doi_mk:
-                           DoiMKFragment doiMKFragment = new DoiMKFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,doiMKFragment).commit();
-                          break;
-                      case R.id.dang_xuat:
-                          ThoatFragment thoatFragment = new ThoatFragment();
-                          manager.beginTransaction().replace(R.id.frameContent,thoatFragment).commit();
-                          break;
-                  }
+                switch (item.getItemId()) {
+                    case R.id.dh_cuatoi:
+                        DonHangFragment donHangFragment = new DonHangFragment();
+                        manager.beginTransaction().replace(R.id.frameContent, donHangFragment).commit();
+                        break;
+                    case R.id.ql_kho:
+                        QuanLyKhoFragment quanLyKhoFragment = new QuanLyKhoFragment();
+                        manager.beginTransaction().replace(R.id.frameContent, quanLyKhoFragment).commit();
+                        break;
+                    case R.id.Doang_thu:
+                        DoanhThuFragment doanhThuFragment = new DoanhThuFragment();
+                        manager.beginTransaction().replace(R.id.frameContent, doanhThuFragment).commit();
+                        break;
+                    case R.id.dang_ky_ban:
+                        DangKyBanFragment dangKyBanFragment = new DangKyBanFragment();
+                        manager.beginTransaction().replace(R.id.frameContent, dangKyBanFragment).commit();
+                        break;
+                    case R.id.shop_cuat:
+                        ShopFragment shopFragment = new ShopFragment();
+                        manager.beginTransaction().replace(R.id.frameContent, shopFragment).commit();
+                        break;
+                    case R.id.doi_mk:
+                        DoiMKFragment doiMKFragment = new DoiMKFragment();
+                        manager.beginTransaction().replace(R.id.frameContent, doiMKFragment).commit();
+                        break;
+                    case R.id.dang_xuat:
+                        ThoatFragment thoatFragment = new ThoatFragment();
+                        manager.beginTransaction().replace(R.id.frameContent, thoatFragment).commit();
+                        break;
+                }
 
-                  layout.closeDrawers();
+                layout.closeDrawers();
                 return false;
             }
         });
@@ -136,31 +197,38 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        TbCatDao catDao = new TbCatDao();
-        //======== Thêm mới 1 dòng
-        TbCategory newObjCat = new TbCategory();
-        newObjCat.setName("Thể loại mới");
+//        TbCatDao catDao = new TbCatDao();
+//        //======== Thêm mới 1 dòng
+//        TbCategory newObjCat = new TbCategory();
+//        newObjCat.setName("Thể loại mới");
+//        catDao.insertRow(newObjCat);
 
-        catDao.insertRow(newObjCat);
+        lv = findViewById(R.id.RCVDoc);
+        dao = new TbCatDao();
+        list = dao.getAll();
+        adapter = new Addapter_rscv_main(MainActivity.this,list,R.layout.item_rscv_main);
+        lv.setAdapter(adapter);
 
 
         // Sửa dữ liệu:
-        TbCategory objCatUpdate = new TbCategory();
-        objCatUpdate.setId(3);
-        objCatUpdate.setName("Dữ liệu đã sửa");
-
-        catDao.updateRow(objCatUpdate);
-
-        List<TbCategory> listCat = catDao.getAll(); // lấy danh sách cho vào biến
-
-        // duyệt mảng in ra danh sách
-        for (int i = 0; i < listCat.size(); i++) {
-            TbCategory objCat = listCat.get(i);
-            Log.d("zzzzz", "onCreate: phần tử thứ " + i + ":  id = " + objCat.getId() + ", name = " + objCat.getName());
-
-        }
+//        TbCategory objCatUpdate = new TbCategory();
+//        objCatUpdate.setId(1);
+//        objCatUpdate.setName("Dữ liệu đã sửa");
+//
+//        catDao.updateRow(objCatUpdate);
+//
+//        List<TbCategory> listCat = catDao.getAll(); // lấy danh sách cho vào biến
+//
+//        // duyệt mảng in ra danh sách
+//        for (int i = 0; i < listCat.size(); i++) {
+//            TbCategory objCat = listCat.get(i);
+//            Log.d("zzzzz", "onCreate: phần tử thứ " + i + ":  id = " + objCat.getId() + "" +
+//                    ", name = " + objCat.getName() + "Giá:" + objCat.getGiatien() + "IMG: " + objCat.getIMG() + "ID_SP: " + objCat.getId_sp());
+//
+//        }
 
     }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -177,11 +245,23 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void loadFrag(Fragment fragment) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.frameContent, fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
     private List<Photo_Object> getListphoto() {
         List<Photo_Object> list = new ArrayList<>();
-        list.add(new Photo_Object(R.drawable.vvv));
-        list.add(new Photo_Object(R.drawable.meo3));
-        list.add(new Photo_Object(R.drawable.meo2));
+
+        list.add(new Photo_Object(R.drawable.img1));
+        list.add(new Photo_Object(R.drawable.img2));
+        list.add(new Photo_Object(R.drawable.img3));
+        list.add(new Photo_Object(R.drawable.img4));
+        list.add(new Photo_Object(R.drawable.d4fe1536c88bb248bd4ba26e116d44cd));
+        list.add(new Photo_Object(R.drawable.d7b093557aee36dc49ca066134b9856f));
+        list.add(new Photo_Object(R.drawable.e35c3d218c0fd24f9ab07a133f9ad2c5));
         return list;
     }
 
