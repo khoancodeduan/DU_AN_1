@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Nhom2.example.du_an_1.Database.DbSqlServer;
+import Nhom2.example.du_an_1.Model.ShopObject;
 import Nhom2.example.du_an_1.Model.TbCategory;
 
 public class TbCatDao {
@@ -50,12 +51,12 @@ public class TbCatDao {
     }
 
 
-    public void insertRow(TbCategory objCat) {
+    public void insertRow(ShopObject obj) {
 
         try {
             if (this.objConn != null) {
                 // ghép chuỗi SQL
-                String insertSQL = "INSERT INTO HANG VALUES (N'" + objCat.getName() + "') ";
+                String insertSQL = " INSERT INTO BANG_SAN_PHAM VALUES ("+obj.getId()+",N'"+obj.getNameSP()+"',"+obj.getGiaTien()+","+obj.getIdhangSP()+",'"+obj.getImg()+"')";
                 String generatedColumns[] = {"ID"};
                 PreparedStatement stmtInsert = this.objConn.prepareStatement(insertSQL, generatedColumns);
                 stmtInsert.execute();

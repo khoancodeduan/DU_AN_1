@@ -1,54 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/id_liner_item"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/id_liner_item"
-        android:background="@drawable/radius_rscv_main"
-        android:weightSum="10"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <ImageView
-            android:background="@drawable/radius_rscv_main"
-            android:id="@+id/id_img1"
-            android:src="@drawable/ic_launcher_background"
-            android:layout_weight="3"
-            android:layout_width="50dp"
-            android:layout_height="80dp"/>
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="20dp"
+        android:background="@drawable/radius_rscv_main"
+        android:orientation="horizontal"
+        android:weightSum="10">
 
-       <LinearLayout
-           android:weightSum="10"
-           android:orientation="vertical"
-           android:layout_weight="5"
-           android:layout_width="0dp"
-           android:layout_height="match_parent">
-
-           <TextView
-               android:text="Name sản phẩm"
-               android:id="@+id/id_name"
-               android:textSize="25dp"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"/>
-
-           <TextView
-               android:textSize="10dp"
-               android:id="@+id/id_gia"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"/>
-
-       </LinearLayout>
-
-        <ImageView
+        <androidx.cardview.widget.CardView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
-            android:src="@drawable/cart"
-            android:layout_weight="2"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="50dp">
+
+            <ImageView
+                android:id="@+id/id_img1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_weight="2"
+                android:background="@drawable/radius_rscv_main"
+                android:src="@drawable/ic_launcher_background" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:layout_weight="8"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Name sản phẩm"
+                android:textColor="#000000"
+                android:textSize="23dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="Giá: "
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:id="@+id/id_gia"
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="10dp"
+                    android:text="gia"
+                    android:textColor="#DF572D"
+                    android:textSize="24dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/id_imgthem"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="2"
+            android:src="@drawable/cart" />
 
     </LinearLayout>
 

@@ -11,6 +11,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -53,9 +54,7 @@ public class Addapter_rscv_main extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
         ViewHolder holder;
-
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.item_rscv_main, null);
 
@@ -67,24 +66,16 @@ public class Addapter_rscv_main extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-
         //gán dữ liệu
-//         = list.get(position);
         holder.id_name.setText(list.get(position).getName());
         holder.id_gia.setText(list.get(position).getGiatien() + "");
-
         Glide.with(convertView.getContext()).load(list.get(position).getIMG()).into(holder.id_img01);
-
-
-//        holder.id_img01.setText(list.get(position).getIMG());
-//        holder.id_img01.setText(R.drawable.logo);
-
         return convertView;
     }
-
     public class ViewHolder {
         TextView id_name, id_gia;
-        ImageView id_img01;
+        ImageView id_img01,imgthem;
+        LinearLayout layout;
 
     }
 }

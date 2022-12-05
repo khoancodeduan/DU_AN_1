@@ -3,29 +3,54 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF9800"
+    android:background="#009688"
     android:orientation="vertical"
     android:gravity="center"
     tools:context=".Fragment.ShopFragment">
 
-    <EditText
-        android:hint="Tên sản phẩm"
-        android:id="@+id/id_name"
-        android:layout_width="match_parent"
+    <ImageView
+        android:src="@drawable/logoo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <EditText
-        android:hint="giá tiền"
-        android:id="@+id/id_gia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+  <LinearLayout
+      android:layout_margin="10dp"
+      android:padding="10dp"
+      android:orientation="vertical"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content">
 
+      <EditText
+          android:hint="ID"
+          android:id="@+id/id"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:hint="Tên sản phẩm"
+          android:id="@+id/id_name"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
 
-
-
+      <EditText
+          android:hint="giá tiền"
+          android:id="@+id/id_gia"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:hint="ID Hang"
+          android:id="@+id/id_Hang"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+      <EditText
+          android:hint="Ảnh SP"
+          android:id="@+id/id_linkANH"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"/>
+  </LinearLayout>
     <Button
         android:id="@+id/id_btn_them"
         android:text="Thêm"
+        android:background="@drawable/radius_thenn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 

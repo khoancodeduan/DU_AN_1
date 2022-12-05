@@ -7,6 +7,7 @@ public class TbCategory {
     String IMG;
     int id_sp;
 
+
     public TbCategory(int id, String name, int giatien, String IMG, int id_sp) {
         this.id = id;
         this.name = name;
@@ -15,8 +16,10 @@ public class TbCategory {
         this.id_sp = id_sp;
     }
 
+
     public TbCategory() {
     }
+
 
     public int getId() {
         return id;

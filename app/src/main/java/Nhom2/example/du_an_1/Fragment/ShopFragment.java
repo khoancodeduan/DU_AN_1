@@ -16,15 +16,16 @@ import java.util.List;
 
 import Nhom2.example.du_an_1.Addapter.Addapter_rscv_main;
 import Nhom2.example.du_an_1.Dao.TbCatDao;
+import Nhom2.example.du_an_1.Model.ShopObject;
 import Nhom2.example.du_an_1.Model.TbCategory;
 import Nhom2.example.du_an_1.R;
 
 public class ShopFragment extends Fragment {
 
-
+    TbCatDao dao;
 
     public ShopFragment() {
-
+        dao = new TbCatDao();
     }
 
 
@@ -51,16 +52,25 @@ public class ShopFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-
         EditText id_name = view.findViewById(R.id.id_name);
         EditText id_gia = view.findViewById(R.id.id_gia);
+        EditText id = view.findViewById(R.id.id);
+        EditText id_Hang = view.findViewById(R.id.id_Hang);
+        EditText id_LinkAnh = view.findViewById(R.id.id_linkANH);
         Button id_btn_them = view.findViewById(R.id.id_btn_them);
-
 
 
         id_btn_them.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                ShopObject shopObject = new ShopObject();
+                shopObject.setId(Integer.parseInt(id.getText().toString()));
+                shopObject.setNameSP(id_name.getText().toString());
+                shopObject.setIdhangSP(Integer.parseInt(id_Hang.getText().toString()));
+                shopObject.setGiaTien(Integer.parseInt(id_gia.getText().toString()));
+                shopObject.setImg(id_LinkAnh.getText().toString());
+                dao.insertRow(shopObject);
 
             }
         });

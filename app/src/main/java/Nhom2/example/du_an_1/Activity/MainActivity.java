@@ -9,17 +9,24 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -31,6 +38,8 @@ import java.util.List;
 
 import Nhom2.example.du_an_1.Addapter.Addapter_rscv_main;
 import Nhom2.example.du_an_1.Addapter.Photo_Addapter;
+import Nhom2.example.du_an_1.Addapter.ShopAddapter;
+import Nhom2.example.du_an_1.Dao.ShopDao;
 import Nhom2.example.du_an_1.Dao.TbCatDao;
 import Nhom2.example.du_an_1.Fragment.DangKyBanFragment;
 import Nhom2.example.du_an_1.Fragment.DoanhThuFragment;
@@ -43,6 +52,7 @@ import Nhom2.example.du_an_1.Fragment.ShopFragment;
 import Nhom2.example.du_an_1.Fragment.ThoatFragment;
 import Nhom2.example.du_an_1.Fragment.Thong_baoFragment;
 import Nhom2.example.du_an_1.Model.Photo_Object;
+import Nhom2.example.du_an_1.Model.ShopObject;
 import Nhom2.example.du_an_1.Model.TbCategory;
 import Nhom2.example.du_an_1.R;
 import me.relex.circleindicator.CircleIndicator3;
@@ -59,13 +69,15 @@ public class MainActivity extends AppCompatActivity {
     ListView layoutitem; //li
     BottomNavigationView view;
     private ArrayAdapter<String> adapter1;
-
-    ListView lv; //li
-
-    List<TbCategory> list;
-    Addapter_rscv_main adapter;
     TbCatDao dao;
-    ///khoan reser du an ...
+    ShopDao shopDao;
+    ListView lv;
+    List<TbCategory> list;
+    List<ShopObject> lsShop;
+    Context context = this;
+    Addapter_rscv_main adapter;
+    ShopAddapter shopAddapter;
+    ImageView imageView;
 
     private Runnable runnable = new Runnable() {
         @Override
@@ -95,17 +107,29 @@ public class MainActivity extends AppCompatActivity {
         nav_menu = findViewById(R.id.nav_menu);
         layoutitem = findViewById(R.id.RCVDoc);
         view = findViewById(R.id.bottom_nav);
+        imageView = findViewById(R.id.id_imgthem);
+        loadData();
 
-//   layoutitem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//       @Override
-//       public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-//           Toast.makeText(MainActivity.this,"Thành công", Toast.LENGTH_SHORT).show();
-//       }
-//   });
+
+        layoutitem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this, "Suuufflyy", Toast.LENGTH_SHORT).show();
+                Intent intent1 = new Intent(MainActivity.this, Gio_hang_Activity.class);
+
+                intent1.putExtra("all", list.get(i).getIMG());
+                intent1.putExtra("ten", list.get(i).getName());
+                intent1.putExtra("gia", list.get(i).getGiatien());
+
+
+                startActivity(intent1);
+
+            }
+        });
 
         view.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {  
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
                 Fragment fragment;
                 switch (item.getItemId()) {
@@ -114,11 +138,11 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                     case R.id.nav_Cart:
-                        fragment = new Gio_hangFragment();
-                        loadFrag(fragment);
+                        Intent intent1 = new Intent(getApplicationContext(), Gio_hang_Activity.class);
+                        startActivity(intent1);
                         break;
                     case R.id.nav_Bell:
-                        fragment = new Thong_baoFragment();
+                        fragment = new ShopFragment();
                         loadFrag(fragment);
                         break;
                     case R.id.nav_setting:
@@ -141,10 +165,10 @@ public class MainActivity extends AppCompatActivity {
                         DonHangFragment donHangFragment = new DonHangFragment();
                         manager.beginTransaction().replace(R.id.frameContent, donHangFragment).commit();
                         break;
-                    case R.id.ql_kho:
-                        QuanLyKhoFragment quanLyKhoFragment = new QuanLyKhoFragment();
-                        manager.beginTransaction().replace(R.id.frameContent, quanLyKhoFragment).commit();
-                        break;
+//                    case R.id.ql_kho:
+//                        QuanLyKhoFragment quanLyKhoFragment = new QuanLyKhoFragment();
+//                        manager.beginTransaction().replace(R.id.frameContent, quanLyKhoFragment).commit();
+//                        break;
                     case R.id.Doang_thu:
                         DoanhThuFragment doanhThuFragment = new DoanhThuFragment();
                         manager.beginTransaction().replace(R.id.frameContent, doanhThuFragment).commit();
@@ -195,11 +219,9 @@ public class MainActivity extends AppCompatActivity {
 //        newObjCat.setName("Thể loại mới");
 //        catDao.insertRow(newObjCat);
 
-        lv = findViewById(R.id.RCVDoc);
+        layoutitem = findViewById(R.id.RCVDoc);
         dao = new TbCatDao();
         list = dao.getAll();
-        adapter = new Addapter_rscv_main(MainActivity.this,list,R.layout.item_rscv_main);
-        lv.setAdapter(adapter);
 
 
         // Sửa dữ liệu:
@@ -234,7 +256,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_top, menu);
         return true;
-
     }
 
     public void loadFrag(Fragment fragment) {
@@ -244,9 +265,21 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    public void loadData() {
+
+        shopDao = new ShopDao();
+        lsShop = shopDao.getAll();
+        if (lsShop.isEmpty()) {
+
+        } else {
+            shopAddapter = new ShopAddapter(lsShop, context);
+            layoutitem.setAdapter(shopAddapter);
+        }
+
+    }
+
     private List<Photo_Object> getListphoto() {
         List<Photo_Object> list = new ArrayList<>();
-
         list.add(new Photo_Object(R.drawable.img1));
         list.add(new Photo_Object(R.drawable.img2));
         list.add(new Photo_Object(R.drawable.img3));
@@ -264,8 +297,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+        loadData();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         mHandler.postDelayed(runnable, 3000);
+        loadData();
     }
 }

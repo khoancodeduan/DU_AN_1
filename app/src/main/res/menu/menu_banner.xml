@@ -9,12 +9,6 @@
         />
 
     <item
-        android:id="@+id/ql_kho"
-        android:title="Quản Lý kho"
-        android:icon="@drawable/warehouse"
-        />
-
-    <item
         android:id="@+id/Doang_thu"
         android:title="Doanh Thu"
         android:icon="@drawable/money"

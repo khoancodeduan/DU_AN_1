@@ -1,6 +1,8 @@
 package Nhom2.example.du_an_1.Model;
 
-public class rcv_Sp {
+import java.io.Serializable;
+
+public class rcv_Sp implements Serializable {
     String img;
     String text_name;
     String text_gia;
